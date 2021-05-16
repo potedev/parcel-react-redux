@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/parcel-bundler/bin/cli.js ./src/index.html"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/potedev/parcel-react-redux.git"
   },
-  "keywords": ["Parcel", "React", "Redux"],
+  "keywords": [
+    "Parcel",
+    "React",
+    "Redux"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -18,7 +23,10 @@
   },
   "homepage": "https://github.com/potedev/parcel-react-redux#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-logger": "^3.0.6"
   },
   "browserslist": [
     "last 3 and_chr versions",
@@ -26,5 +34,9 @@
     "last 3 opera versions",
     "last 3 ios_saf versions",
     "last 3 safari versions"
-  ]
+  ],
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
 }
