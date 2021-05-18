@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 const initialState = {
     name: "E-brairie",
     init: false,
@@ -19,6 +17,4 @@ const initialStateReducer = (state = initialState, action) => {
     }
 }
 
-const rootReducer = combineReducers({ app: initialStateReducer })
-
-export default rootReducer
+export default initialStateReducer

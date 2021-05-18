@@ -1,47 +1,51 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+//Routing
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-//Our parents containers
-import Login from './pages/login'
+//Protected Routes
 import Home from './pages/home'
+import Books from './pages/books'
+
+//Public Routes
+import Register from './pages/register'
+import Login from './pages/login'
+
+//Components
+import Layout from './components/layout'
+import '../css/style.css'
 
 const App = () => {
+    const appState = useSelector(state => state);
     const dispatch = useDispatch();
-    const appState = useSelector(state => state.app)
 
+    //Lors de l'initialisation de mon composant
     useEffect(() => {
-
-        dispatch({ type: "APP_INIT" })
+        //J'envoie une action à mon store
+        dispatch({ type: 'APP_INIT' })
 
         setTimeout(() => {
-            dispatch({ type: "APP_READY" })
-        }, 2000)
+            dispatch({ type: 'APP_READY' })
+        }, 1000)
     }, [])
-
-    console.log('APP global state : ', appState)
 
     if (appState.loading) return <div>Loading...</div>
 
     return (
         <Router>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                </ul>
-            </nav>
             <Switch>
-                <Route path="/" exact component={Home} />
+                {/* http://localhost:1234/login */}
+                <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Layout>
+                    {/* http://localhost:1234/ */}
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/books" component={Books} />
+                </Layout>
             </Switch>
         </Router>
     )
 }
 
-export default App
+export default App;
