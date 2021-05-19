@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import api from './utils/api'
 
 //Routing
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { AuthRoute } from './components/authRoute'
 
 //Protected Routes
 import Home from './pages/home'
@@ -21,13 +23,18 @@ const App = () => {
     const dispatch = useDispatch();
 
     //Lors de l'initialisation de mon composant
-    useEffect(() => {
+    useEffect(async () => {
         //J'envoie une action à mon store
         dispatch({ type: 'APP_INIT' })
 
-        setTimeout(() => {
-            dispatch({ type: 'APP_READY' })
-        }, 1000)
+        let result = await api.get('/users/me');
+
+        console.log(result);
+
+        console.log('USER', result.data);
+
+        dispatch({ type: 'APP_READY' })
+
     }, [])
 
     if (appState.loading) return <div>Loading...</div>
