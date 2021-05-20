@@ -19,25 +19,27 @@ import Layout from './components/layout'
 import '../css/style.css'
 
 const App = () => {
-    const appState = useSelector(state => state);
+    const appState = useSelector(state => state.app);
     const dispatch = useDispatch();
 
     //Lors de l'initialisation de mon composant
     useEffect(async () => {
-        //J'envoie une action à mon store
         dispatch({ type: 'APP_INIT' })
+        dispatch({ type: 'USER_FETCH' })
 
-        let result = await api.get('/users/me');
-
-        console.log(result);
-
-        console.log('USER', result.data);
+        try {
+            let result = await api.get('/users/me');
+            dispatch({ type: 'USER_SET', payload: result.data })
+        }
+        catch (err) {
+            dispatch({ type: 'USER_RESET' })
+        }
 
         dispatch({ type: 'APP_READY' })
 
     }, [])
 
-    if (appState.loading) return <div>Loading...</div>
+    if (!appState.init) return <div>Loading...</div>
 
     return (
         <Router>
@@ -47,8 +49,8 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Layout>
                     {/* http://localhost:1234/ */}
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/books" component={Books} />
+                    <AuthRoute exact path="/" component={Home} />
+                    <AuthRoute exact path="/books" component={Books} />
                 </Layout>
             </Switch>
         </Router>

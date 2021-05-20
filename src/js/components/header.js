@@ -7,8 +7,6 @@ function Header(props) {
 
     const title = useSelector(state => state.name)
 
-    console.log(title);
-
     return (
         <header style={{ backgroundColor:'grey', color:'white',display: 'flex', alignItems:'center' }}>
             <div>

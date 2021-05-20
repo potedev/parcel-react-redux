@@ -9,13 +9,12 @@ import Header from './header'
 // </App>
 
 const Layout = ({ children }) => {
-    console.log(children);
     return (
         <div>
             <Header />
-            <div style={{ display: 'flex',flexGrow:'1' }}>
+            <div style={{ display: 'flex', flexGrow: '1' }}>
                 <Nav />
-                <main style={{backgroundColor:'teal',width:'100%'}}>
+                <main style={{ backgroundColor: 'teal', width: '100%' }}>
                     {children}
                 </main>
             </div>
